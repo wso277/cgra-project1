@@ -16,12 +16,16 @@ public:
 	void init();
 	void display();
 	void toggleSomething(){};
+	void update(unsigned long millis);
 	CGFlight* light0;
 	CGFlight* light1;
 	CGFlight* light2;
 	CGFlight* light3;
+	CGFlight* light4;
 	MyClock clock;
 	MyRobot robot;
+	unsigned long updateTime = 100;
+	int animate = 1;
 	int sceneVar;
 	myTable* table;
 	Plane* wall;

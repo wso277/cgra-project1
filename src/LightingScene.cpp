@@ -22,6 +22,8 @@ float light1_pos[4] = {10.5, 6.0, 1.0, 1.0};
 float light2_pos[4] = {10.5, 6.0, 5.0, 1.0};
 float light3_pos[4] = {4, 6.0, 5.0, 1.0};
 
+float light4_pos[4] = {0.5, 5.0, 7.0, 1.0};
+
 // Global ambient light (do not confuse with ambient component of individual lights)j
 float globalAmbientLight[4]= {0,0,0,1.0};
 
@@ -46,51 +48,51 @@ float yellow[4]={1,1,0,1};
 
 CGFappearance* tableAppearance;
 CGFappearance* windowAppearance;
-CGFappearance* slidesAppearance; 
+CGFappearance* slidesAppearance;
 CGFappearance* boardAppearance;
 CGFappearance* floorAppearance;
 
 
 
-void LightingScene::init() 
+void LightingScene::init()
 {
 	sceneVar = 0;
 	// Enables lighting computations
 	glEnable(GL_LIGHTING);
-	
-	
-	
+
+
+
 
 	// Sets up some lighting parameters
 	// Computes lighting only using the front face normals and materials
-	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);  
-	
+	glLightModelf(GL_LIGHT_MODEL_TWO_SIDE, GL_FALSE);
+
 	// Define ambient light (do not confuse with ambient component of individual lights)
-	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientLight);  
-	
+	glLightModelfv(GL_LIGHT_MODEL_AMBIENT, globalAmbientLight);
+
 	// Declares and enables two lights, with null ambient component
 
 	light0 = new CGFlight(GL_LIGHT0, light0_pos);
 	light0->setAmbient(ambientNull);
 	light0->setSpecular(yellow);
-	
 
-	//light0->disable();
+
 	light0->enable();
+	//light0->enable();
 
 	light1 = new CGFlight(GL_LIGHT1, light1_pos);
 	light1->setAmbient(ambientNull);
-	
-	//light1->disable();
+
 	light1->enable();
-	
+	//light1->enable();
+
 
 	light2 = new CGFlight(GL_LIGHT2, light2_pos);
 	glLightf(GL_LIGHT2, GL_CONSTANT_ATTENUATION, 0);
 	glLightf(GL_LIGHT2, GL_LINEAR_ATTENUATION, 1);
 	glLightf(GL_LIGHT2, GL_QUADRATIC_ATTENUATION, 0);
 	light2->setAmbient(ambientNull);
-	
+
 	light2->enable();
 
 	light3 = new CGFlight(GL_LIGHT3, light3_pos);
@@ -98,10 +100,15 @@ void LightingScene::init()
 	glLightf(GL_LIGHT3, GL_LINEAR_ATTENUATION, 0);
 	glLightf(GL_LIGHT3, GL_QUADRATIC_ATTENUATION, 1);
 	light3->setAmbient(ambientNull);
-	
+
 	light3->enable();
-	
-	
+
+	light4 =new CGFlight(GL_LIGHT4, light4_pos);
+	glLightf(GL_LIGHT4, GL_CONSTANT_ATTENUATION, 1);
+	light4->setAmbient(ambientNull);
+
+	light4->enable();
+
 	// Uncomment below to enable normalization of lighting normal vectors
 	 glEnable (GL_NORMALIZE);
 
@@ -110,7 +117,7 @@ void LightingScene::init()
 	wall = new Plane(1,-0.5 ,2);
 	boardA = new Plane(BOARD_A_DIVISIONS,0,1);
 	boardB = new Plane(BOARD_B_DIVISIONS,0,1);
-	
+
 	//Declares materials
 	materialA = new CGFappearance(ambA,difA,specA,shininessA);
 	materialB = new CGFappearance(ambB,difB,specB,shininessB);
@@ -124,7 +131,7 @@ void LightingScene::init()
 	float difS[3] = {0.6, 0.6, 0.6};
 	float specS[3] = {0.2, 0.2, 0.2};
 	float shininessS = 10.f;
-	
+
 	float ambBd[3] = {0.2, 0.2, 0.2};
 	float difBd[3] = {0.2, 0.2, 0.2};
 	float specBd[3] = {0.5, 0.5, 0.5};
@@ -132,27 +139,29 @@ void LightingScene::init()
 	tableAppearance = new CGFappearance(ambT,difT,specT,shininessT);
 	tableAppearance->setTexture("table.png");
 
-	
+
 	slidesAppearance = new CGFappearance(ambS,difS,specS,shininessS);
 	slidesAppearance->setTexture("slides.png");
 	boardAppearance = new CGFappearance(ambBd,difBd,specBd,shininessBd);
 	boardAppearance->setTexture("board.png");
 
-	windowAppearance = new CGFappearance(ambT,difT,specT,shininessT); 
+	windowAppearance = new CGFappearance(ambT,difT,specT,shininessT);
 	windowAppearance->setTexture("window.png");
 	windowAppearance->setTextureWrap(GL_CLAMP, GL_CLAMP);
 
 	floorAppearance = new CGFappearance(ambT,difT,specT,shininessT);
 	floorAppearance->setTexture("floor.png");
+
+	setUpdatePeriod(updateTime);
 }
 
-void LightingScene::display() 
+void LightingScene::display()
 {
 	myCylinder cilindro(30,5,true);
 	myCylinder cilindro_flat(30,5,false);
 
 	// ---- BEGIN Background, camera and axis setup
-	
+
 	// Clear image and depth buffer everytime we update the scene
 	glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
 
@@ -167,30 +176,32 @@ void LightingScene::display()
 	light1->draw();
 	light2->draw();
 	light3->draw();
+	light4->draw();
 	// Draw axis
 	axis.draw();
 
 	// ---- END Background, camera and axis setup
 
 	// ---- BEGIN Primitive drawing section
-	
-	
+
+
 	glPushMatrix();
 	glTranslated(2,0,11);
 	glScaled(1,8,1);
 	cilindro.draw();
 	glPopMatrix();
-	
-	
+
+
 	/*glPushMatrix();
 	glTranslated(14,0,11);
 	glScaled(1,8,1);
 	cilindro_flat.draw();
 	glPopMatrix();*/
-	
-	
+
+	//clock
 	clock.draw();
 
+	//robot
 	robot.draw();
 
 
@@ -201,7 +212,7 @@ void LightingScene::display()
 		glTranslated(7.5,4,0);
 		glRotated(90.0,1,0,0);
 		glScaled(15,0.2,8);
-		
+
 		wall->draw();
 	glPopMatrix();
 
@@ -222,7 +233,7 @@ void LightingScene::display()
 		glTranslated(7.5,0,7.5);
 		glScaled(15,0.2,15);
 		floorAppearance->apply();
-		wall->draw();
+		wall->draw(12,10);
 	glPopMatrix();
 	// Board A
 	glPushMatrix();
@@ -232,7 +243,7 @@ void LightingScene::display()
 		slidesAppearance->apply();
 		boardA->draw();
 	glPopMatrix();
-	
+
 	//PlaneB
 	glPushMatrix();
 		glTranslated(10.5,4,0.2);
@@ -250,15 +261,15 @@ void LightingScene::display()
 	glPopMatrix();
 
 
-	
+
 	/*//Second Table
 	glPushMatrix();
 		glTranslated(12,-6.5,8);
 		table->draw();
 	glPopMatrix();*/
-	
+
 	// ---- END Primitive drawing section
-	
+
 
 	// We have been drawing in a memory area that is not visible - the back buffer, 
 	// while the graphics card is showing the contents of another buffer - the front buffer
@@ -266,7 +277,7 @@ void LightingScene::display()
 	glutSwapBuffers();
 }
 
-LightingScene::~LightingScene() 
+LightingScene::~LightingScene()
 {
 	delete(light0);
 	delete(light1);
@@ -277,4 +288,10 @@ LightingScene::~LightingScene()
 	delete(boardB);
 	delete(materialA);
 	delete(materialB);
+}
+
+void LightingScene::update(unsigned long milis) {
+
+	if (animate)
+		clock.update(milis);
 }
