@@ -150,12 +150,7 @@ void LightingScene::display()
 {
 	myCylinder cilindro(30,5,true);
 	myCylinder cilindro_flat(30,5,false);
-	
-	//clock
-	
-	/*MyClock clock;
-	clock.draw();*/
-	
+
 	// ---- BEGIN Background, camera and axis setup
 	
 	// Clear image and depth buffer everytime we update the scene
@@ -194,6 +189,7 @@ void LightingScene::display()
 	glPopMatrix();*/
 	
 	
+	clock.draw();
 
 	robot.draw();
 

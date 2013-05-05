@@ -7,11 +7,13 @@
 
 class MyClock : public CGFobject
 {
-	myCylinder* clock; 
+	myCylinder clockCil;
+	myCylinder min;
+	myCylinder sec;
+	myCylinder hour;
 public:
-	MyClock(void);
+	MyClock();
 	void draw();
-	~MyClock(void);
 };
 
 

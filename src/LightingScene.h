@@ -6,6 +6,7 @@
 #include "MyTable.h"
 #include "Plane.h"
 #include "MyRobot.h"
+#include "MyClock.h"
 
 
 
@@ -19,6 +20,7 @@ public:
 	CGFlight* light1;
 	CGFlight* light2;
 	CGFlight* light3;
+	MyClock clock;
 	MyRobot robot;
 	int sceneVar;
 	myTable* table;

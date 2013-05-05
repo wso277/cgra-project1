@@ -5,6 +5,13 @@
 float pi1 = acos(-1.0);
 float deg2rad2=pi1/180.0;
 
+myCylinder::myCylinder() {
+
+	this->slices = 12;
+	this->stacks = 1;
+	this->smooth = true;
+}
+
 myCylinder::myCylinder(int slices, int stacks, bool smooth) {
 	
 	this->slices = slices;
