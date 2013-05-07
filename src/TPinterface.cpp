@@ -40,11 +40,11 @@ void TPinterface::initGUI() {
 
 	// You could also pass a reference to a variable from the scene class, if public
 	//addSpinnerToPanel(varPanel, "Val 2(scene)", 2, &(((LightingScene*) scene)->sceneVar), 2);
-	int on0 = 1;
-	int on1 = 1;
-	int on2 = 1;
-	int on3 = 1;
-	int on4 = 1;
+	int on0 = -1;
+	int on1 = -1;
+	int on2 = -1;
+	int on3 = -1;
+	int on4 = -1;
 	addCheckboxToPanel(varPanel, "light0", &on0, 0);
 	addCheckboxToPanel(varPanel, "light1", &on1, 1);
 	addCheckboxToPanel(varPanel, "light2", &on2, 2);
@@ -58,52 +58,62 @@ void TPinterface::initGUI() {
 void TPinterface::processGUI(GLUI_Control *ctrl) {
 	switch (ctrl->user_id) {
 	case 0: {
-		if (((LightingScene *) scene)->light0->isEnabled()) {
+		if (((LightingScene *) scene)->light0on) {
 			printf("Light 0: off\n");
 			((LightingScene *) scene)->light0->disable();
+			((LightingScene *) scene)->light0on = false;
 		} else {
 			printf("Light 0: on\n");
 			((LightingScene *) scene)->light0->enable();
+			((LightingScene *) scene)->light0on = true;
 		}
 		break;
 	}
 	case 1: {
-		if (((LightingScene *) scene)->light1->isEnabled()) {
+		if (((LightingScene *) scene)->light1on) {
 			printf("Light 1: off\n");
 			((LightingScene *) scene)->light1->disable();
+			((LightingScene *) scene)->light1on = false;
 		} else {
 			printf("Light 1: on\n");
 			((LightingScene *) scene)->light1->enable();
+			((LightingScene *) scene)->light1on = true;
 		}
 		break;
 	}
 	case 2: {
-		if (((LightingScene *) scene)->light2->isEnabled()) {
+		if (((LightingScene *) scene)->light2on) {
 			printf("Light 2: off\n");
 			((LightingScene *) scene)->light2->disable();
+			((LightingScene *) scene)->light2on = false;
 		} else {
 			printf("Light 2: on\n");
 			((LightingScene *) scene)->light2->enable();
+			((LightingScene *) scene)->light2on = true;
 		}
 		break;
 	}
 	case 3: {
-		if (((LightingScene *) scene)->light3->isEnabled()) {
+		if (((LightingScene *) scene)->light3on) {
 			printf("Light 3: off\n");
 			((LightingScene *) scene)->light3->disable();
+			((LightingScene *) scene)->light3on = false;
 		} else {
 			printf("Light 3: on\n");
 			((LightingScene *) scene)->light3->enable();
+			((LightingScene *) scene)->light3on = true;
 		}
 		break;
 	}
 	case 4: {
-		if (((LightingScene *) scene)->light4->isEnabled()) {
+		if (((LightingScene *) scene)->light4on) {
 			printf("Light 4: off\n");
 			((LightingScene *) scene)->light4->disable();
+			((LightingScene *) scene)->light4on = false;
 		} else {
 			printf("Light 4: on\n");
 			((LightingScene *) scene)->light4->enable();
+			((LightingScene *) scene)->light4on = true;
 		}
 		break;
 	}

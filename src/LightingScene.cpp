@@ -51,6 +51,7 @@ CGFappearance* windowAppearance;
 CGFappearance* slidesAppearance;
 CGFappearance* boardAppearance;
 CGFappearance* floorAppearance;
+CGFappearance* clockAppearance;
 
 
 
@@ -60,7 +61,14 @@ void LightingScene::init()
 	// Enables lighting computations
 	glEnable(GL_LIGHTING);
 
+	animate=1;
+	updateTime=100;
 
+	light0on = true;
+	light1on = true;
+	light2on = true;
+	light3on = true;
+	light4on = true;
 
 
 	// Sets up some lighting parameters
@@ -152,6 +160,10 @@ void LightingScene::init()
 	floorAppearance = new CGFappearance(ambT,difT,specT,shininessT);
 	floorAppearance->setTexture("floor.png");
 
+	clockAppearance = new CGFappearance(ambT,difT,specT,shininessT);
+	clockAppearance->setTexture("clock.png");
+	clockAppearance->setTextureWrap(GL_CLAMP, GL_CLAMP);
+
 	setUpdatePeriod(updateTime);
 }
 
@@ -198,9 +210,6 @@ void LightingScene::display()
 	cilindro_flat.draw();
 	glPopMatrix();*/
 
-	//clock
-	clock.draw();
-
 	//robot
 	robot.draw();
 
@@ -215,6 +224,11 @@ void LightingScene::display()
 
 		wall->draw();
 	glPopMatrix();
+
+
+	//clock
+	clockAppearance->apply();
+	clock.draw();
 
 		//LeftWall
 	glPushMatrix();

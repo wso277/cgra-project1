@@ -18,28 +18,28 @@ void MyClock::draw()
 
 
 	glPushMatrix();
-	glTranslated(7.2,8,0);
-	glRotated(90,1,0,0);
+	glTranslated(7.2,8,0.5);
+	glRotated(-90,1,0,0);
 	glScaled(1,0.2,1);
 	clockCil.draw();
 	glPopMatrix();
 	
 	glPushMatrix();
-	glTranslated(7.2,8,0.2);
+	glTranslated(7.2,8,0.7);
 	glRotatef(sec.getAngle(),0,0,1);
 	glScaled(0.025,0.8,0.025);
 	sec.draw();
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(7.2,8,0.2);
+	glTranslated(7.2,8,0.7);
 	glRotatef(min.getAngle(),0,0,1);
 	glScaled(0.05,0.7,0.05);
 	min.draw();
 	glPopMatrix();
 
 	glPushMatrix();
-	glTranslated(7.2,8,0.2);
+	glTranslated(7.2,8,0.7);
 	glRotatef(hour.getAngle(),0,0,1);
 	glScaled(0.05,0.5,0.05);
 	hour.draw();

@@ -11,11 +11,7 @@ void MyRobot::draw() {
 	glNormal3f(0, 1, 0);
 	glTranslated(translate_x, 0, translate_z);
 	glRotated(rotacao, 0, 1, 0);
-	glBegin(GL_POLYGON);
-	glVertex3d(0.5, 0.3, 0);
-	glVertex3d(-0.5, 0.3, 0);
-	glVertex3d(0, 0.3, 2);
-	glEnd();
+	robot->draw();
 	glPopMatrix();
 }
 
