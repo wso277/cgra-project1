@@ -10,8 +10,8 @@ class MyRobot{
 	double translate_z;
 	MyRobotDraw* robot;
 public:
-	MyRobot(){rotacao = 200;translate_x=8.0;translate_z = 8.0;robot = new MyRobotDraw(12,4);};
-	MyRobot(int slices, int stacks) {rotacao = 200;translate_x=8.0;translate_z = 8.0;robot = new MyRobotDraw(slices,stacks);};
+	MyRobot(){rotacao = 200;translate_x=8.0;translate_z = 8.0;robot = new MyRobotDraw(4);};
+	MyRobot(int stacks) {rotacao = 200;translate_x=8.0;translate_z = 8.0;robot = new MyRobotDraw(stacks);};
 	void draw();
 	void moveLeft();
 	void moveRight();

@@ -196,13 +196,11 @@ void LightingScene::display()
 
 	// ---- BEGIN Primitive drawing section
 
-
 	glPushMatrix();
 	glTranslated(2,0,11);
 	glScaled(1,8,1);
 	cilindro.draw();
 	glPopMatrix();
-
 
 	/*glPushMatrix();
 	glTranslated(14,0,11);
@@ -211,8 +209,10 @@ void LightingScene::display()
 	glPopMatrix();*/
 
 	//robot
-	robot.draw();
 
+	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+	robot.draw();
+	//glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
 
 

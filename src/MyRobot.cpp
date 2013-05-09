@@ -17,7 +17,7 @@ void MyRobot::draw() {
 
 void MyRobot::moveLeft() {
 
-	rotacao += 5;
+	rotacao += 2;
 	if (rotacao >= 360)
 		rotacao = rotacao - 360;
 	draw();
@@ -25,7 +25,7 @@ void MyRobot::moveLeft() {
 }
 
 void MyRobot::moveRight() {
-	rotacao -= 5;
+	rotacao -= 2;
 	if (rotacao <= 0)
 		rotacao += 360;
 	draw();
@@ -33,14 +33,14 @@ void MyRobot::moveRight() {
 
 void MyRobot::moveForward() {
 
-	translate_x += 0.5 * sin(rotacao * deg2rad3);
-	translate_z += 0.5 * cos(rotacao * deg2rad3);
+	translate_x += 0.2 * sin(rotacao * deg2rad3);
+	translate_z += 0.2 * cos(rotacao * deg2rad3);
 	draw();
 }
 
 void MyRobot::moveBackward() {
 
-	translate_x -= 0.5 * sin(rotacao * deg2rad3);
-	translate_z -= 0.5 * cos(rotacao * deg2rad3);
+	translate_x -= 0.2 * sin(rotacao * deg2rad3);
+	translate_z -= 0.2 * cos(rotacao * deg2rad3);
 	draw();
 }
