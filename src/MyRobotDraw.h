@@ -9,11 +9,14 @@
 #define MYROBOTDRAW_H_
 
 
+#include <vector>
+#include "Point.h"
 #include "CGFobject.h"
 
 class MyRobotDraw : public CGFobject{
 
 	int slices, stacks;
+	vector<Point*> points;
 	float x,y,z;
 public:
 	MyRobotDraw(int stacks);
