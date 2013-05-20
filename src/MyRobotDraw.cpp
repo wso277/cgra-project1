@@ -24,47 +24,99 @@ MyRobotDraw::MyRobotDraw(int stacks) {
 	slices = 12;
 	float step = 360 / slices;
 	int mov = 0;
-	int j = 13;
+	int j = 16;
+	vector<float> ponto;
 
 	this->stacks = stacks;
 	points.push_back(new Point(initx, altura, initz, stacks));
+	ponto.push_back(0);
+	ponto.push_back(0);
+	ponto.push_back(1);
+	normais.push_back(ponto);
+	ponto.clear();
 
 	for (int i = 1; i < 26; i++) {
 		switch (mov) {
 		case 0:
 			initx += delta;
 			points.push_back(new Point(initx, altura, initz, stacks));
+			ponto.push_back(0);
+			ponto.push_back(0);
+			ponto.push_back(1);
+			normais.push_back(ponto);
+			ponto.clear();
 			break;
 
 		case 1:
 			initz -= delta;
 			points.push_back(new Point(initx, altura, initz, stacks));
+			ponto.push_back(1);
+			ponto.push_back(0);
+			ponto.push_back(0);
+			normais.push_back(ponto);
+			ponto.clear();
 			break;
 
 		case 2:
 			initx -= delta;
 			points.push_back(new Point(initx, altura, initz, stacks));
+			ponto.push_back(0);
+			ponto.push_back(0);
+			ponto.push_back(-1);
+			normais.push_back(ponto);
+			ponto.clear();
 			break;
 
 		case 3:
 			initz += delta;
 			points.push_back(new Point(initx, altura, initz, stacks));
+			ponto.push_back(-1);
+			ponto.push_back(0);
+			ponto.push_back(0);
+			normais.push_back(ponto);
+			ponto.clear();
 			break;
 
 		case 4:
 			points.push_back(
 					new Point(sin(angle * deg2rad4) / 4.0, 1.0,
 							cos(angle * deg2rad4) / 4.0, stacks));
+			ponto.push_back(sin(angle * deg2rad4));
+			ponto.push_back(0);
+			ponto.push_back(cos(angle * deg2rad4));
+			normais.push_back(ponto);
+			ponto.clear();
 			angle += step;
 			break;
 		}
 
-		if (i == 3)
+		if (i == 3) {
 			mov = 1;
-		if (i == 6)
+			points.push_back(new Point(initx, altura, initz, stacks));
+			ponto.push_back(1);
+			ponto.push_back(0);
+			ponto.push_back(0);
+			normais.push_back(ponto);
+			ponto.clear();
+		}
+		if (i == 6) {
 			mov = 2;
-		if (i == 9)
+			points.push_back(new Point(initx, altura, initz, stacks));
+			ponto.push_back(0);
+			ponto.push_back(0);
+			ponto.push_back(-1);
+			normais.push_back(ponto);
+			ponto.clear();
+		}
+		if (i == 9) {
 			mov = 3;
+			points.push_back(new Point(initx, altura, initz, stacks));
+			ponto.push_back(-1);
+			ponto.push_back(0);
+			ponto.push_back(0);
+			normais.push_back(ponto);
+			ponto.clear();
+		}
 		if (i == 12) {
 			mov = 4;
 			//printf("size: %d", points.size());
@@ -73,124 +125,160 @@ MyRobotDraw::MyRobotDraw(int stacks) {
 
 	//printf("size: %d", points.size());
 
-	for (int i = 0; i < 13; i++) {
+	for (int i = 0; i < 16; i++) {
 
 		points[i]->setStep(*points[j]);
-		j++;
+		normalx.push_back((normais[i][0] - normais[j][0]) / stacks);
+		normalz.push_back((normais[i][2] - normais[j][2]) / stacks);
+		if (i == 3 || i == 6 || i == 9) {
+		}
+		else {
+			j++;
+		}
 
 		points[i]->xtemp = points[i]->x;
 		points[i]->ztemp = points[i]->z;
 	}
 
-	float alturatmp = 1.0 / stacks;
-	float altura1 = 1.0 / stacks;
-	vector<float> ponto;
-	vector<vector<float> > vertices;
+	/*float alturatmp = 1.0 / stacks;
+	 float altura1 = 1.0 / stacks;
+	 vector<float> ponto;
+	 vector<vector<float> > vertices;
 
-	for (float j = 0.0; j < 1;) {
+	 for (float j = 0.0; j < 1;) {
 
-		for (int i = 0; i < 13; i++) {
+	 for (int i = 0; i <= 13; i++) {
 
-			if (j == 0) {
-				ponto.push_back(points[i]->xtemp - points[i]->distx);
-				ponto.push_back(alturatmp);
-				ponto.push_back(points[i]->ztemp - points[i]->distz);
-				vertices.push_back(ponto);
-				ponto.clear();
+	 if (j == 0) {
+	 ponto.push_back(points[i]->xtemp - points[i]->distx);
+	 ponto.push_back(alturatmp);
+	 ponto.push_back(points[i]->ztemp - points[i]->distz);
+	 vertices.push_back(ponto);
+	 ponto.clear();
 
-				ponto.push_back(points[i + 1]->xtemp - points[i + 1]->distx);
-				ponto.push_back(alturatmp);
-				ponto.push_back(points[i + 1]->ztemp - points[i + 1]->distz);
-				vertices.push_back(ponto);
-				ponto.clear();
+	 ponto.push_back(points[i + 1]->xtemp - points[i + 1]->distx);
+	 ponto.push_back(alturatmp);
+	 ponto.push_back(points[i + 1]->ztemp - points[i + 1]->distz);
+	 vertices.push_back(ponto);
+	 ponto.clear();
 
-				ponto.push_back(points[i + 1]->xtemp - points[i + 1]->distx);
-				ponto.push_back(alturatmp - altura1);
-				ponto.push_back(points[i + 1]->ztemp - points[i + 1]->distz);
-				vertices.push_back(ponto);
-				ponto.clear();
+	 ponto.push_back(points[i + 1]->xtemp - points[i + 1]->distx);
+	 ponto.push_back(alturatmp - altura1);
+	 ponto.push_back(points[i + 1]->ztemp - points[i + 1]->distz);
+	 vertices.push_back(ponto);
+	 ponto.clear();
 
-				ponto.push_back(points[i]->xtemp);
-				ponto.push_back(alturatmp - altura1);
-				ponto.push_back(points[i]->ztemp);
-				vertices.push_back(ponto);
-				ponto.clear();
+	 ponto.push_back(points[i]->xtemp);
+	 ponto.push_back(alturatmp - altura1);
+	 ponto.push_back(points[i]->ztemp);
+	 vertices.push_back(ponto);
+	 ponto.clear();
 
-				if (i > 0) {
-					ponto.push_back(points[i - 1]->xtemp);
-					ponto.push_back(alturatmp - altura1);
-					ponto.push_back(points[i - 1]->ztemp);
-					vertices.push_back(ponto);
-					ponto.clear();
-				}
+	 if (i > 0) {
+	 ponto.push_back(points[i - 1]->xtemp);
+	 ponto.push_back(alturatmp - altura1);
+	 ponto.push_back(points[i - 1]->ztemp);
+	 vertices.push_back(ponto);
+	 ponto.clear();
 
-				normais.push_back(calculaNormais(vertices));
-				vertices.clear();
-			} else {
-				ponto.push_back(points[i]->xtemp - points[i]->distx);
-				ponto.push_back(alturatmp);
-				ponto.push_back(points[i]->ztemp - points[i]->distz);
-				vertices.push_back(ponto);
-				ponto.clear();
+	 ponto.push_back(points[i - 1]->xtemp);
+	 ponto.push_back(alturatmp);
+	 ponto.push_back(points[i - 1]->ztemp);
+	 vertices.push_back(ponto);
+	 ponto.clear();
+	 }
 
-				ponto.push_back(points[i + 1]->xtemp - points[i + 1]->distx);
-				ponto.push_back(alturatmp);
-				ponto.push_back(points[i + 1]->ztemp - points[i + 1]->distz);
-				vertices.push_back(ponto);
-				ponto.clear();
+	 if (i == 0) {
+	 ponto.push_back(points[12]->xtemp);
+	 ponto.push_back(alturatmp - altura1);
+	 ponto.push_back(points[12]->ztemp);
+	 vertices.push_back(ponto);
+	 ponto.clear();
 
-				ponto.push_back(points[i + 1]->xtemp - points[i + 1]->distx);
-				ponto.push_back(alturatmp - altura1);
-				ponto.push_back(points[i + 1]->ztemp - points[i + 1]->distz);
-				vertices.push_back(ponto);
-				ponto.clear();
+	 ponto.push_back(points[12]->xtemp);
+	 ponto.push_back(alturatmp);
+	 ponto.push_back(points[12]->ztemp);
+	 vertices.push_back(ponto);
+	 ponto.clear();
+	 }
 
-				ponto.push_back(points[i]->xtemp);
-				ponto.push_back(alturatmp - altura1);
-				ponto.push_back(points[i]->ztemp);
-				vertices.push_back(ponto);
-				ponto.clear();
+	 normais.push_back(calculaNormais(vertices));
+	 vertices.clear();
+	 } else {
+	 ponto.push_back(points[i]->xtemp - points[i]->distx);
+	 ponto.push_back(alturatmp);
+	 ponto.push_back(points[i]->ztemp - points[i]->distz);
+	 vertices.push_back(ponto);
+	 ponto.clear();
 
-				ponto.push_back(points[i]->xtemp + points[i + 1]->distx);
-				ponto.push_back(alturatmp - (2 * altura1));
-				ponto.push_back(points[i]->ztemp + points[i + 1]->distz);
-				vertices.push_back(ponto);
-				ponto.clear();
+	 ponto.push_back(points[i + 1]->xtemp - points[i + 1]->distx);
+	 ponto.push_back(alturatmp);
+	 ponto.push_back(points[i + 1]->ztemp - points[i + 1]->distz);
+	 vertices.push_back(ponto);
+	 ponto.clear();
 
-				if (i > 0) {
-					ponto.push_back(points[i - 1]->xtemp);
-					ponto.push_back(alturatmp - altura1);
-					ponto.push_back(points[i - 1]->ztemp);
-					vertices.push_back(ponto);
-					ponto.clear();
+	 ponto.push_back(points[i + 1]->xtemp - points[i + 1]->distx);
+	 ponto.push_back(alturatmp - altura1);
+	 ponto.push_back(points[i + 1]->ztemp - points[i + 1]->distz);
+	 vertices.push_back(ponto);
+	 ponto.clear();
 
-					ponto.push_back(
-							points[i - 1]->xtemp + points[i - 1]->distx);
-					ponto.push_back(alturatmp - (2 * altura1));
-					ponto.push_back(
-							points[i - 1]->ztemp + points[i - 1]->distz);
-					vertices.push_back(ponto);
-					ponto.clear();
+	 ponto.push_back(points[i]->xtemp);
+	 ponto.push_back(alturatmp - altura1);
+	 ponto.push_back(points[i]->ztemp);
+	 vertices.push_back(ponto);
+	 ponto.clear();
 
-					ponto.push_back(points[i - 1]->xtemp);
-					ponto.push_back(alturatmp - altura1);
-					ponto.push_back(points[i - 1]->ztemp);
-					vertices.push_back(ponto);
-					ponto.clear();
-				}
-				normais.push_back(calculaNormais(vertices));
-				vertices.clear();
-			}
+	 ponto.push_back(points[i]->xtemp + points[i]->distx);
+	 ponto.push_back(alturatmp - (2 * altura1));
+	 ponto.push_back(points[i]->ztemp + points[i]->distz);
+	 vertices.push_back(ponto);
+	 ponto.clear();
 
-			points[i]->xtemp -= points[i]->distx;
-			points[i]->ztemp -= points[i]->distz;
+	 if (i > 0) {
+	 ponto.push_back(points[i - 1]->xtemp);
+	 ponto.push_back(alturatmp - altura1);
+	 ponto.push_back(points[i - 1]->ztemp);
+	 vertices.push_back(ponto);
+	 ponto.clear();
 
-		}
+	 ponto.push_back(
+	 points[i - 1]->xtemp + points[i - 1]->distx);
+	 ponto.push_back(alturatmp - (2 * altura1));
+	 ponto.push_back(
+	 points[i - 1]->ztemp + points[i - 1]->distz);
+	 vertices.push_back(ponto);
+	 ponto.clear();
+	 }
+	 if (i == 0) {
+	 ponto.push_back(points[12]->xtemp);
+	 ponto.push_back(alturatmp - altura1);
+	 ponto.push_back(points[12]->ztemp);
+	 vertices.push_back(ponto);
+	 ponto.clear();
 
-		alturatmp += altura1;
-		j += altura1;
+	 ponto.push_back(
+	 points[12]->xtemp + points[12]->distx);
+	 ponto.push_back(alturatmp - (2 * altura1));
+	 ponto.push_back(
+	 points[12]->ztemp + points[12]->distz);
+	 vertices.push_back(ponto);
+	 ponto.clear();
+	 }
 
-	}
+	 normais.push_back(calculaNormais(vertices));
+	 vertices.clear();
+	 }
+
+	 points[i]->xtemp -= points[i]->distx;
+	 points[i]->ztemp -= points[i]->distz;
+
+	 }
+
+	 alturatmp += altura1;
+	 j += altura1;
+
+	 }*/
 
 }
 
@@ -210,13 +298,12 @@ void MyRobotDraw::draw() {
 
 	float altura = 1.0 / stacks;
 	float altura1 = 1.0 / stacks;
-	int orientacao = 0;
 	vector<float> ponto;
 	vector<vector<float> > vertices;
 
 //	printf("normal0 = %f\nnormal\ = %f\nnormal2 = %f\n", normais[0][0],normais[0][1],normais[0][2]);
 
-	for (int i = 0; i < 13; i++) {
+	for (int i = 0; i < 16; i++) {
 
 		points[i]->xtemp = points[i]->x;
 		points[i]->ztemp = points[i]->z;
@@ -224,26 +311,22 @@ void MyRobotDraw::draw() {
 
 	for (float j = 0.0; j < 1;) {
 
-		int a = 0;
 		glBegin(GL_TRIANGLE_STRIP);
-		for (int i = 0; i < 13; i++) {
+		for (int i = 0; i < 16; i++) {
 
-
-
-			glNormal3f(normais[a+13][0], normais[a+13][1], normais[a+13][2]);
+			glNormal3f(normais[i][0] + ((i + 1) * normalx[i]), 0,
+					normais[i][2] + ((i + 1) * normalz[i]));
 
 			glVertex3f(points[i]->xtemp - points[i]->distx, altura,
 					points[i]->ztemp - points[i]->distz);
 
-			glNormal3f(normais[a][0], normais[a][1], normais[a][2]);
-			a++;
+			glNormal3f(normais[i][0] + (i * normalx[i]), 0,
+					normais[i][2] + (i * normalz[i]));
+
 			glVertex3f(points[i]->xtemp, altura - altura1, points[i]->ztemp);
 
 			points[i]->xtemp -= points[i]->distx;
 			points[i]->ztemp -= points[i]->distz;
-
-			if ((i % 3) == 0 && i != 0)
-				orientacao++;
 
 		}
 
@@ -256,6 +339,10 @@ void MyRobotDraw::draw() {
 
 }
 
+/**Metodo de Newell para poligonos com numero de vertices arbitrario.
+ *
+ * Por aconselhamento do professor, utilizamos alternativamente calculo atraves de interpolacao
+ */
 vector<float> MyRobotDraw::calculaNormais(vector<vector<float> > vertices) {
 	vector<float> tmp;
 	tmp.push_back(0);
@@ -277,51 +364,3 @@ vector<float> MyRobotDraw::calculaNormais(vector<vector<float> > vertices) {
 
 	return tmp;
 }
-
-/*
- if ((i % 3) == 0)
-
- switch (i) {
- case 0:
- ponto.push_back(points[i]->xtemp - points[i]->distx);
- ponto.push_back(alturatmp);
- ponto.push_back(points[i]->ztemp - points[i]->distz);
-
- vertices.push_back(ponto);
- ponto.clear();
-
- ponto.push_back(points[i]->xtemp);
- ponto.push_back(alturatmp - altura1);
- ponto.push_back(points[i]->ztemp);
-
- vertices.push_back(ponto);
- ponto.clear();
- break;
-
- case 3:
- case 6:
- case 9:
- case 12:
- vector<float> tmp1, tmp2;
- ponto.push_back(points[i]->xtemp - points[i]->distx);
- ponto.push_back(alturatmp);
- ponto.push_back(points[i]->ztemp - points[i]->distz);
- tmp1 = ponto;
- vertices.push_back(ponto);
- ponto.clear();
-
- ponto.push_back(points[i]->xtemp);
- ponto.push_back(alturatmp - altura1);
- ponto.push_back(points[i]->ztemp);
- tmp2 = ponto;
- vertices.push_back(ponto);
- ponto.clear();
-
- normais.push_back(calculaNormais(vertices));
-
- vertices.clear();
-
- vertices.push_back(tmp1);
- vertices.push_back(tmp2);
- break;
- }*/

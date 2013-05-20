@@ -19,6 +19,8 @@ class MyRobotDraw : public CGFobject{
 	int slices, stacks;
 	vector<Point*> points;
 	vector<vector<float> > normais;
+	vector<float> normalx;
+	vector<float> normalz;
 	float x,y,z;
 public:
 	MyRobotDraw(int stacks);
