@@ -10,6 +10,7 @@ class TPscene : public CGFscene
 public:
 	void init();
 	void display();
+	
 };
 
 

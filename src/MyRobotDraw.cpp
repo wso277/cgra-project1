@@ -26,7 +26,6 @@ MyRobotDraw::MyRobotDraw(int stacks) {
 	int mov = 0;
 	int j = 13;
 
-
 	this->stacks = stacks;
 	points.push_back(new Point(initx,altura,initz, stacks));
 
@@ -78,6 +77,99 @@ MyRobotDraw::MyRobotDraw(int stacks) {
 		j++;
 	}
 
+	
+	float alturatmp = 1.0 / stacks;
+	float altura1 = 1.0 / stacks;
+	vector<float> ponto;
+	vector<vector<float>> vertices;
+
+	for (float j=0.0; j < 1;) {
+
+		for (int i=0; i<13;i++) {
+
+		
+			if( (i % 3 ) == 0)
+				
+				switch(i)
+			{
+				case 0:
+					ponto.push_back(points[i]->xtemp - points[i]->distx);
+					ponto.push_back(alturatmp);
+					ponto.push_back(points[i]->ztemp - points[i]->distz);
+
+					vertices.push_back(ponto);
+					ponto.clear();
+
+					
+					ponto.push_back(points[i]->xtemp);
+					ponto.push_back(alturatmp - altura1);
+					ponto.push_back(points[i]->ztemp);
+
+					vertices.push_back(ponto);
+					ponto.clear();
+					break;
+
+				case 3:
+				case 6:
+				case 9:
+				case 12:
+					vector<float> tmp1,tmp2;
+					ponto.push_back(points[i]->xtemp - points[i]->distx);
+					ponto.push_back(alturatmp);
+					ponto.push_back(points[i]->ztemp - points[i]->distz);
+					tmp1 = ponto;
+					vertices.push_back(ponto);
+					ponto.clear();
+
+					
+					ponto.push_back(points[i]->xtemp);
+					ponto.push_back(alturatmp - altura1);
+					ponto.push_back(points[i]->ztemp);
+					tmp2 = ponto;
+					vertices.push_back(ponto);
+					ponto.clear();
+					
+					normais.push_back(calculaNormais(vertices));
+
+					
+					vertices.clear();
+
+					vertices.push_back(tmp1);
+					vertices.push_back(tmp2);
+					break;
+			}
+
+			
+
+			
+		
+
+			points[i]->xtemp -= points[i]->distx;
+			points[i]->ztemp -= points[i]->distz;
+
+		}
+
+	
+
+		alturatmp+=altura1;
+		j+=altura1;
+
+	}
+
+	for (int i=0; i<13;i++) {
+
+
+		points[i]->xtemp = points[i]->x;
+		points[i]->ztemp = points[i]->z;
+	}
+
+
+
+	
+
+
+	
+
 }
 
 void MyRobotDraw::getNormal() {
@@ -96,25 +188,44 @@ void MyRobotDraw::draw() {
 
 	float altura = 1.0 / stacks;
 	float altura1 = 1.0 / stacks;
+	int orientacao = 0;
+	vector<float> ponto;
+	vector<vector<float>> vertices;
 
+//	printf("normal0 = %f\nnormal\ = %f\nnormal2 = %f\n", normais[0][0],normais[0][1],normais[0][2]);
 
 	for (float j=0.0; j < 1;) {
 
 		glBegin(GL_TRIANGLE_STRIP);
 		for (int i=0; i<13;i++) {
 
-
+		
+			
+			
+				glNormal3f(normais[0][0], normais[0][1], normais[0][2]);
+				
+	
+			
 			glVertex3f(points[i]->xtemp - points[i]->distx, altura, points[i]->ztemp - points[i]->distz );
+
+			
 			glVertex3f(points[i]->xtemp, altura - altura1, points[i]->ztemp );
+
+			
+		
 
 			points[i]->xtemp -= points[i]->distx;
 			points[i]->ztemp -= points[i]->distz;
+
+			if( (i % 3) == 0 && i != 0) orientacao++;
+
 		}
 
 		glEnd();
 
 		altura+=altura1;
 		j+=altura1;
+
 	}
 
 	for (int i=0; i<13;i++) {

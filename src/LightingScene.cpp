@@ -210,9 +210,9 @@ void LightingScene::display()
 
 	//robot
 
-	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+	glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 	robot.draw();
-	//glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
 
 
