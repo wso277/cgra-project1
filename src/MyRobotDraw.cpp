@@ -157,6 +157,8 @@ void MyRobotDraw::draw() {
 	float altura1 = 1.0 / stacks;
 	vector<float> ponto;
 	vector<vector<float> > vertices;
+	float texts = 1.0/stacks;
+	float textt = 1.0/slices;
 
 //	printf("normal0 = %f\nnormal\ = %f\nnormal2 = %f\n", normais[0][0],normais[0][1],normais[0][2]);
 
@@ -167,16 +169,20 @@ void MyRobotDraw::draw() {
 	}
 
 	int a = 0;
+
 	for (float j = 0.0; j < 1;) {
 
 		glBegin(GL_TRIANGLE_STRIP);
 
 		for (int i = 0; i < 16; i++) {
 
+			//glTexCoord2d(   (((double)(j+1)/1.0)),(( (double)(i)/1.0)));
 			glNormal3f(normais[i][0] + ((a + 1) * normalx[i]), 0,
 					normais[i][2] + ((a + 1) * normalz[i]));
-
-			//glTexCoord2d(0.5/stacks*,(( (double)(i)/1.0)));
+			if (i ==3 || i == 6 || i == 9 || i ==12)
+				glTexCoord2d(((i-1)*2+1)*texts,(a/2+1)*textt);
+			else
+				glTexCoord2d((i*2+1)*texts,(a/2+1)*textt);
 
 			glVertex3f(points[i]->xtemp - points[i]->distx, altura,
 					points[i]->ztemp - points[i]->distz);
@@ -184,20 +190,19 @@ void MyRobotDraw::draw() {
 			glNormal3f(normais[i][0] + (a * normalx[i]), 0,
 					normais[i][2] + (a * normalz[i]));
 
-			//glTexCoord2d(   (((double)(j+1)/1.0)),(( (double)(i)/1.0)));
+			glTexCoord2d(i*2*texts,a/2*textt);
 
 			glVertex3f(points[i]->xtemp, altura - altura1, points[i]->ztemp);
 
 			points[i]->xtemp -= points[i]->distx;
 			points[i]->ztemp -= points[i]->distz;
-
 		}
-		a++;
 
 		glEnd();
 
 		altura += altura1;
 		j += altura1;
+		a++;
 
 	}
 
