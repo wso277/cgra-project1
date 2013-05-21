@@ -81,9 +81,9 @@ MyRobotDraw::MyRobotDraw(int stacks) {
 			points.push_back(
 					new Point(sin(angle * deg2rad4) / 4.0, 1.0,
 							cos(angle * deg2rad4) / 4.0, stacks));
-			ponto.push_back(sin(angle * deg2rad4));
+			ponto.push_back(sin((angle-100) * deg2rad4));
 			ponto.push_back(0);
-			ponto.push_back(cos(angle * deg2rad4));
+			ponto.push_back(cos((angle-100) * deg2rad4));
 			normais.push_back(ponto);
 			ponto.clear();
 			angle += step;
@@ -119,11 +119,8 @@ MyRobotDraw::MyRobotDraw(int stacks) {
 		}
 		if (i == 12) {
 			mov = 4;
-			//printf("size: %d", points.size());
 		}
 	}
-
-	//printf("size: %d", points.size());
 
 	for (int i = 0; i < 16; i++) {
 
@@ -139,146 +136,6 @@ MyRobotDraw::MyRobotDraw(int stacks) {
 		points[i]->xtemp = points[i]->x;
 		points[i]->ztemp = points[i]->z;
 	}
-
-	/*float alturatmp = 1.0 / stacks;
-	 float altura1 = 1.0 / stacks;
-	 vector<float> ponto;
-	 vector<vector<float> > vertices;
-
-	 for (float j = 0.0; j < 1;) {
-
-	 for (int i = 0; i <= 13; i++) {
-
-	 if (j == 0) {
-	 ponto.push_back(points[i]->xtemp - points[i]->distx);
-	 ponto.push_back(alturatmp);
-	 ponto.push_back(points[i]->ztemp - points[i]->distz);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-
-	 ponto.push_back(points[i + 1]->xtemp - points[i + 1]->distx);
-	 ponto.push_back(alturatmp);
-	 ponto.push_back(points[i + 1]->ztemp - points[i + 1]->distz);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-
-	 ponto.push_back(points[i + 1]->xtemp - points[i + 1]->distx);
-	 ponto.push_back(alturatmp - altura1);
-	 ponto.push_back(points[i + 1]->ztemp - points[i + 1]->distz);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-
-	 ponto.push_back(points[i]->xtemp);
-	 ponto.push_back(alturatmp - altura1);
-	 ponto.push_back(points[i]->ztemp);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-
-	 if (i > 0) {
-	 ponto.push_back(points[i - 1]->xtemp);
-	 ponto.push_back(alturatmp - altura1);
-	 ponto.push_back(points[i - 1]->ztemp);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-
-	 ponto.push_back(points[i - 1]->xtemp);
-	 ponto.push_back(alturatmp);
-	 ponto.push_back(points[i - 1]->ztemp);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-	 }
-
-	 if (i == 0) {
-	 ponto.push_back(points[12]->xtemp);
-	 ponto.push_back(alturatmp - altura1);
-	 ponto.push_back(points[12]->ztemp);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-
-	 ponto.push_back(points[12]->xtemp);
-	 ponto.push_back(alturatmp);
-	 ponto.push_back(points[12]->ztemp);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-	 }
-
-	 normais.push_back(calculaNormais(vertices));
-	 vertices.clear();
-	 } else {
-	 ponto.push_back(points[i]->xtemp - points[i]->distx);
-	 ponto.push_back(alturatmp);
-	 ponto.push_back(points[i]->ztemp - points[i]->distz);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-
-	 ponto.push_back(points[i + 1]->xtemp - points[i + 1]->distx);
-	 ponto.push_back(alturatmp);
-	 ponto.push_back(points[i + 1]->ztemp - points[i + 1]->distz);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-
-	 ponto.push_back(points[i + 1]->xtemp - points[i + 1]->distx);
-	 ponto.push_back(alturatmp - altura1);
-	 ponto.push_back(points[i + 1]->ztemp - points[i + 1]->distz);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-
-	 ponto.push_back(points[i]->xtemp);
-	 ponto.push_back(alturatmp - altura1);
-	 ponto.push_back(points[i]->ztemp);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-
-	 ponto.push_back(points[i]->xtemp + points[i]->distx);
-	 ponto.push_back(alturatmp - (2 * altura1));
-	 ponto.push_back(points[i]->ztemp + points[i]->distz);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-
-	 if (i > 0) {
-	 ponto.push_back(points[i - 1]->xtemp);
-	 ponto.push_back(alturatmp - altura1);
-	 ponto.push_back(points[i - 1]->ztemp);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-
-	 ponto.push_back(
-	 points[i - 1]->xtemp + points[i - 1]->distx);
-	 ponto.push_back(alturatmp - (2 * altura1));
-	 ponto.push_back(
-	 points[i - 1]->ztemp + points[i - 1]->distz);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-	 }
-	 if (i == 0) {
-	 ponto.push_back(points[12]->xtemp);
-	 ponto.push_back(alturatmp - altura1);
-	 ponto.push_back(points[12]->ztemp);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-
-	 ponto.push_back(
-	 points[12]->xtemp + points[12]->distx);
-	 ponto.push_back(alturatmp - (2 * altura1));
-	 ponto.push_back(
-	 points[12]->ztemp + points[12]->distz);
-	 vertices.push_back(ponto);
-	 ponto.clear();
-	 }
-
-	 normais.push_back(calculaNormais(vertices));
-	 vertices.clear();
-	 }
-
-	 points[i]->xtemp -= points[i]->distx;
-	 points[i]->ztemp -= points[i]->distz;
-
-	 }
-
-	 alturatmp += altura1;
-	 j += altura1;
-
-	 }*/
 
 }
 
@@ -309,19 +166,25 @@ void MyRobotDraw::draw() {
 		points[i]->ztemp = points[i]->z;
 	}
 
+	int a = 0;
 	for (float j = 0.0; j < 1;) {
 
 		glBegin(GL_TRIANGLE_STRIP);
+
 		for (int i = 0; i < 16; i++) {
 
-			glNormal3f(normais[i][0] + ((i + 1) * normalx[i]), 0,
-					normais[i][2] + ((i + 1) * normalz[i]));
+			glNormal3f(normais[i][0] + ((a + 1) * normalx[i]), 0,
+					normais[i][2] + ((a + 1) * normalz[i]));
+
+			//glTexCoord2d(0.5/stacks*,(( (double)(i)/1.0)));
 
 			glVertex3f(points[i]->xtemp - points[i]->distx, altura,
 					points[i]->ztemp - points[i]->distz);
 
-			glNormal3f(normais[i][0] + (i * normalx[i]), 0,
-					normais[i][2] + (i * normalz[i]));
+			glNormal3f(normais[i][0] + (a * normalx[i]), 0,
+					normais[i][2] + (a * normalz[i]));
+
+			//glTexCoord2d(   (((double)(j+1)/1.0)),(( (double)(i)/1.0)));
 
 			glVertex3f(points[i]->xtemp, altura - altura1, points[i]->ztemp);
 
@@ -329,6 +192,7 @@ void MyRobotDraw::draw() {
 			points[i]->ztemp -= points[i]->distz;
 
 		}
+		a++;
 
 		glEnd();
 
@@ -341,7 +205,7 @@ void MyRobotDraw::draw() {
 
 /**Metodo de Newell para poligonos com numero de vertices arbitrario.
  *
- * Por aconselhamento do professor, utilizamos alternativamente calculo atraves de interpolacao
+ * Por aconselhamento do professor, utilizamos alternativamente calculo de normais atraves de interpolacao
  */
 vector<float> MyRobotDraw::calculaNormais(vector<vector<float> > vertices) {
 	vector<float> tmp;

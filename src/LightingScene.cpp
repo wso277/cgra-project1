@@ -52,6 +52,7 @@ CGFappearance* slidesAppearance;
 CGFappearance* boardAppearance;
 CGFappearance* floorAppearance;
 CGFappearance* clockAppearance;
+CGFappearance* robotAppearance;
 
 
 
@@ -164,6 +165,9 @@ void LightingScene::init()
 	clockAppearance->setTexture("clock.png");
 	clockAppearance->setTextureWrap(GL_CLAMP, GL_CLAMP);
 
+	robotAppearance = new CGFappearance(ambT,difT,specT,shininessT);
+	robotAppearance->setTexture("robot1.jpg");
+
 	setUpdatePeriod(updateTime);
 }
 
@@ -208,14 +212,6 @@ void LightingScene::display()
 	cilindro_flat.draw();
 	glPopMatrix();*/
 
-	//robot
-
-	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-	robot.draw();
-	//glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
-
-
-
 	//PlaneWall
 	glPushMatrix();
 		glTranslated(7.5,4,0);
@@ -229,6 +225,11 @@ void LightingScene::display()
 	//clock
 	clockAppearance->apply();
 	clock.draw();
+
+	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+	robotAppearance->apply();
+	robot.draw();
+	//glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
 		//LeftWall
 	glPushMatrix();
