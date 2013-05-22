@@ -28,6 +28,7 @@ MyRobotDraw::MyRobotDraw(int stacks) {
 	vector<float> ponto;
 
 	wireframe = false;
+	texture = 0;
 
 	this->stacks = stacks;
 	points.push_back(new Point(initx, altura, initz, stacks));
@@ -221,6 +222,10 @@ void MyRobotDraw::setWireframe() {
 	else {
 		wireframe = true;
 	}
+}
+
+void MyRobotDraw::setTexture(int t) {
+	texture = t;
 }
 
 /**Metodo de Newell para poligonos com numero de vertices arbitrario.

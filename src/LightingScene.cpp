@@ -53,6 +53,7 @@ CGFappearance* boardAppearance;
 CGFappearance* floorAppearance;
 CGFappearance* clockAppearance;
 CGFappearance* robotAppearance;
+CGFappearance* earthAppearance;
 
 
 
@@ -168,6 +169,9 @@ void LightingScene::init()
 	robotAppearance = new CGFappearance(ambT,difT,specT,shininessT);
 	robotAppearance->setTexture("robot1.jpg");
 
+	earthAppearance = new CGFappearance(ambT,difT,specT,shininessT);
+	earthAppearance->setTexture("earth.jpg");
+
 	setUpdatePeriod(updateTime);
 }
 
@@ -226,10 +230,15 @@ void LightingScene::display()
 	clockAppearance->apply();
 	clock.draw();
 
-	//glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
-	robotAppearance->apply();
+	switch (robot.robot->texture) {
+	case 0: robotAppearance->apply();
+			break;
+	case 1: earthAppearance->apply();
+			break;
+
+	}
+
 	robot.draw();
-	//glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
 		//LeftWall
 	glPushMatrix();

@@ -3,6 +3,13 @@
 
 TPinterface::TPinterface() {
 	testVar = 0;
+	on0 = 1;
+	on1 = 1;
+	on2 = 1;
+	on3 = 1;
+	on4 = 1;
+	radioStatus = 0;
+	listStatus = 0;
 }
 
 void TPinterface::processKeyboard(unsigned char key, int x, int y) {
@@ -40,11 +47,7 @@ void TPinterface::initGUI() {
 
 	// You could also pass a reference to a variable from the scene class, if public
 	//addSpinnerToPanel(varPanel, "Val 2(scene)", 2, &(((LightingScene*) scene)->sceneVar), 2);
-	int on0 = -1;
-	int on1 = -1;
-	int on2 = -1;
-	int on3 = -1;
-	int on4 = -1;
+
 	addCheckboxToPanel(varPanel, "light0", &on0, 0);
 	addCheckboxToPanel(varPanel, "light1", &on1, 1);
 	addCheckboxToPanel(varPanel, "light2", &on2, 2);
@@ -53,13 +56,18 @@ void TPinterface::initGUI() {
 
 	addButtonToPanel(varPanel, "Clock", 5);
 
-	int radioStatus = 0;
 
 	GLUI_RadioGroup* wireframeGroup = addRadioGroupToPanel(varPanel,&radioStatus, 6);
 
 	addRadioButtonToGroup(wireframeGroup, "Textured");
 	addRadioButtonToGroup(wireframeGroup, "Wireframed");
 
+
+
+	GLUI_Listbox* listBox = addListboxToPanel(varPanel,"Textures",&listStatus, 7);
+
+	listBox->add_item(0, "Default");
+	listBox->add_item(1, "Earth");
 
 }
 
@@ -134,6 +142,9 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 	case 6: {
 		((LightingScene *) scene)->robot.robot->setWireframe();
 		break;
+	}
+	case 7: {
+		((LightingScene *) scene)->robot.robot->setTexture(listStatus);
 	}
 	};
 }

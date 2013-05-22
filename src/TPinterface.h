@@ -4,16 +4,22 @@
 #include "CGFinterface.h"
 
 class TPinterface: public CGFinterface {
-	public:
-		TPinterface();
+public:
+	int on0;
+	int on1;
+	int on2;
+	int on3;
+	int on4;
+	int radioStatus;
+	int listStatus;
+	TPinterface();
 
-		virtual void initGUI();
-		virtual void processGUI(GLUI_Control *ctrl);
+	virtual void initGUI();
+	virtual void processGUI(GLUI_Control *ctrl);
 
-		virtual void processKeyboard(unsigned char key, int x, int y);
+	virtual void processKeyboard(unsigned char key, int x, int y);
 
-		int testVar;
+	int testVar;
 };
-
 
 #endif
