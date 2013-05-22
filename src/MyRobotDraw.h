@@ -20,6 +20,7 @@ class MyRobotDraw : public CGFobject{
 	vector<Point*> points;
 	vector<vector<float> > normais;
 	vector<float> normalx;
+	vector<float> normaly;
 	vector<float> normalz;
 	float x,y,z;
 	bool wireframe;

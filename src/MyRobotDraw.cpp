@@ -86,7 +86,7 @@ MyRobotDraw::MyRobotDraw(int stacks) {
 					new Point(sin(angle * deg2rad4) / 4.0, 1.0,
 							cos(angle * deg2rad4) / 4.0, stacks));
 			ponto.push_back(sin((angle-100) * deg2rad4));
-			ponto.push_back(0);
+			ponto.push_back(0.5);
 			ponto.push_back(cos((angle-100) * deg2rad4));
 			normais.push_back(ponto);
 			ponto.clear();
@@ -130,6 +130,7 @@ MyRobotDraw::MyRobotDraw(int stacks) {
 
 		points[i]->setStep(*points[j]);
 		normalx.push_back((normais[i][0] - normais[j][0]) / stacks);
+		normaly.push_back((normais[i][1] - normais[j][1]) / stacks);
 		normalz.push_back((normais[i][2] - normais[j][2]) / stacks);
 		if (i == 3 || i == 6 || i == 9) {
 		}
@@ -183,7 +184,7 @@ void MyRobotDraw::draw() {
 		for (int i = 0; i < 16; i++) {
 
 			//glTexCoord2d(   (((double)(j+1)/1.0)),(( (double)(i)/1.0)));
-			glNormal3f(normais[i][0] + ((a + 1) * normalx[i]), 0,
+			glNormal3f(normais[i][0] + ((a + 1) * normalx[i]), normais[i][1] + ((a + 1) * normaly[i]),
 					normais[i][2] + ((a + 1) * normalz[i]));
 
 			glTexCoord2f(points[i]->xtemp - points[i]->distx + 0.5, 0.5 - (points[i]->ztemp - points[i]->distz));
@@ -191,7 +192,7 @@ void MyRobotDraw::draw() {
 			glVertex3f(points[i]->xtemp - points[i]->distx, altura,
 					points[i]->ztemp - points[i]->distz);
 
-			glNormal3f(normais[i][0] + (a * normalx[i]), 0,
+			glNormal3f(normais[i][0] + (a * normalx[i]),  normais[i][1] + (a * normaly[i]),
 					normais[i][2] + (a * normalz[i]));
 
 			glTexCoord2f(points[i]->xtemp + 0.5, 0.5 - points[i]->ztemp);
