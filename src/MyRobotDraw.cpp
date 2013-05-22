@@ -86,7 +86,7 @@ MyRobotDraw::MyRobotDraw(int stacks) {
 					new Point(sin(angle * deg2rad4) / 4.0, 1.0,
 							cos(angle * deg2rad4) / 4.0, stacks));
 			ponto.push_back(sin((angle-100) * deg2rad4));
-			ponto.push_back(0.5);
+			ponto.push_back(-0.5);
 			ponto.push_back(cos((angle-100) * deg2rad4));
 			normais.push_back(ponto);
 			ponto.clear();

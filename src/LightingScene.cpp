@@ -125,6 +125,7 @@ void LightingScene::init()
 	//Declares scene elements
 	table = new myTable();
 	wall = new Plane(1,-0.5 ,2);
+	windowWall = new LeftWall(1,-0.5,2);
 	boardA = new Plane(BOARD_A_DIVISIONS,0,1);
 	boardB = new Plane(BOARD_B_DIVISIONS,0,1);
 
@@ -247,7 +248,7 @@ void LightingScene::display()
 
 		glScaled(8,0.2,15);
 		windowAppearance->apply();
-		wall->draw();
+		windowWall->draw();
 	glPopMatrix();
 
 

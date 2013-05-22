@@ -5,6 +5,7 @@
 #include "CGFappearance.h"
 #include "MyTable.h"
 #include "Plane.h"
+#include "LeftWall.h"
 #include "MyRobot.h"
 #include "MyClock.h"
 
@@ -34,6 +35,7 @@ public:
 	int sceneVar;
 	myTable* table;
 	Plane* wall;
+    LeftWall* windowWall;
 	Plane* boardA;
 	Plane* boardB;
 	CGFappearance* materialA;
