@@ -165,6 +165,8 @@ void MyRobotDraw::draw() {
 
 //	printf("normal0 = %f\nnormal\ = %f\nnormal2 = %f\n", normais[0][0],normais[0][1],normais[0][2]);
 
+	glDisable(GL_CULL_FACE);
+
 	if (wireframe) {
 		glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
 	}
@@ -212,6 +214,8 @@ void MyRobotDraw::draw() {
 	}
 
 	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+
+	glEnable(GL_CULL_FACE);
 
 }
 
