@@ -22,11 +22,13 @@ class MyRobotDraw : public CGFobject{
 	vector<float> normalx;
 	vector<float> normalz;
 	float x,y,z;
+	bool wireframe;
 public:
 	MyRobotDraw(int stacks);
 	void draw();
 	void getNormal();
 	vector<float> calculaNormais(vector<vector<float> > vertices);
+	void setWireframe();
 
 };
 

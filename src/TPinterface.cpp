@@ -35,7 +35,7 @@ void TPinterface::processKeyboard(unsigned char key, int x, int y) {
 
 void TPinterface::initGUI() {
 	// Check CGFinterface.h and GLUI documentation for the types of controls available
-	GLUI_Panel *varPanel = addPanel("Group", 1);
+	GLUI_Panel *varPanel = addPanel("Lights", 1);
 	//addSpinnerToPanel(varPanel, "Val 1(interface)", 2, &testVar, 1);
 
 	// You could also pass a reference to a variable from the scene class, if public
@@ -52,6 +52,14 @@ void TPinterface::initGUI() {
 	addCheckboxToPanel(varPanel, "light4", &on4, 4);
 
 	addButtonToPanel(varPanel, "Clock", 5);
+
+	int radioStatus = 0;
+
+	GLUI_RadioGroup* wireframeGroup = addRadioGroupToPanel(varPanel,&radioStatus, 6);
+
+	addRadioButtonToGroup(wireframeGroup, "Textured");
+	addRadioButtonToGroup(wireframeGroup, "Wireframed");
+
 
 }
 
@@ -122,6 +130,10 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 			((LightingScene *) scene)->animate = 0;
 		else
 			((LightingScene *) scene)->animate = 1;
+	}
+	case 6: {
+		((LightingScene *) scene)->robot.robot->setWireframe();
+		break;
 	}
 	};
 }

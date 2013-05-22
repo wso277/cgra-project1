@@ -27,6 +27,8 @@ MyRobotDraw::MyRobotDraw(int stacks) {
 	int j = 16;
 	vector<float> ponto;
 
+	wireframe = false;
+
 	this->stacks = stacks;
 	points.push_back(new Point(initx, altura, initz, stacks));
 	ponto.push_back(0);
@@ -158,10 +160,12 @@ void MyRobotDraw::draw() {
 	float altura1 = 1.0 / stacks;
 	vector<float> ponto;
 	vector<vector<float> > vertices;
-	float texts = 1.0/stacks;
-	float textt = 1.0/slices;
 
 //	printf("normal0 = %f\nnormal\ = %f\nnormal2 = %f\n", normais[0][0],normais[0][1],normais[0][2]);
+
+	if (wireframe) {
+		glPolygonMode( GL_FRONT_AND_BACK, GL_LINE );
+	}
 
 	for (int i = 0; i < 16; i++) {
 
@@ -205,6 +209,18 @@ void MyRobotDraw::draw() {
 
 	}
 
+	glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+
+}
+
+void MyRobotDraw::setWireframe() {
+
+	if (wireframe) {
+		wireframe = false;
+	}
+	else {
+		wireframe = true;
+	}
 }
 
 /**Metodo de Newell para poligonos com numero de vertices arbitrario.
