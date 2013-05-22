@@ -45,6 +45,7 @@ MyRobotDraw::MyRobotDraw(int stacks) {
 			ponto.push_back(1);
 			normais.push_back(ponto);
 			ponto.clear();
+
 			break;
 
 		case 1:
@@ -179,10 +180,8 @@ void MyRobotDraw::draw() {
 			//glTexCoord2d(   (((double)(j+1)/1.0)),(( (double)(i)/1.0)));
 			glNormal3f(normais[i][0] + ((a + 1) * normalx[i]), 0,
 					normais[i][2] + ((a + 1) * normalz[i]));
-			if (i ==3 || i == 6 || i == 9 || i ==12)
-				glTexCoord2d(((i-1)*2+1)*texts,(a/2+1)*textt);
-			else
-				glTexCoord2d((i*2+1)*texts,(a/2+1)*textt);
+
+			glTexCoord2f(points[i]->xtemp - points[i]->distx + 0.5, 0.5 - (points[i]->ztemp - points[i]->distz));
 
 			glVertex3f(points[i]->xtemp - points[i]->distx, altura,
 					points[i]->ztemp - points[i]->distz);
@@ -190,7 +189,7 @@ void MyRobotDraw::draw() {
 			glNormal3f(normais[i][0] + (a * normalx[i]), 0,
 					normais[i][2] + (a * normalz[i]));
 
-			glTexCoord2d(i*2*texts,a/2*textt);
+			glTexCoord2f(points[i]->xtemp + 0.5, 0.5 - points[i]->ztemp);
 
 			glVertex3f(points[i]->xtemp, altura - altura1, points[i]->ztemp);
 
