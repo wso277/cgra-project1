@@ -138,6 +138,8 @@ void TPinterface::processGUI(GLUI_Control *ctrl) {
 			((LightingScene *) scene)->animate = 0;
 		else
 			((LightingScene *) scene)->animate = 1;
+
+		break;
 	}
 	case 6: {
 		((LightingScene *) scene)->robot.robot->setWireframe();

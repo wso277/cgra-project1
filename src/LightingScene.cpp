@@ -165,7 +165,7 @@ void LightingScene::init()
 
 	clockAppearance = new CGFappearance(ambT,difT,specT,shininessT);
 	clockAppearance->setTexture("clock.png");
-	clockAppearance->setTextureWrap(GL_CLAMP, GL_CLAMP);
+	//clockAppearance->setTextureWrap(GL_CLAMP, GL_CLAMP);
 
 	robotAppearance = new CGFappearance(ambT,difT,specT,shininessT);
 	robotAppearance->setTexture("robot1.jpg");

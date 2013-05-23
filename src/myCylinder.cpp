@@ -88,6 +88,7 @@ void myCylinder::draw() {
 	glTexCoord2d(s, t);
 	glVertex3f(cos(0.0), 0, sin(0.0));
 
+
 	for (int i = 0; i <= slices; i++) {
 
 		if (angulo <= 90) {
@@ -107,7 +108,7 @@ void myCylinder::draw() {
 			t+=sdelta;
 		}
 
-		glTexCoord2d(s, t);
+		glTexCoord2d(cos(angulo * deg2rad2)*0.5 + 0.5, sin(angulo * deg2rad2)*0.5 + 0.5);
 		glVertex3f(cos(angulo * deg2rad2), 0, sin(angulo * deg2rad2));
 
 		angulo += delta;
