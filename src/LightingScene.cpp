@@ -243,10 +243,10 @@ void LightingScene::display()
 
 		//LeftWall
 	glPushMatrix();
-		glTranslated(0,4,7.5);
+		/*glTranslated(0,4,7.5);
 		glRotated(-90.0,0,0,1);
 
-		glScaled(8,0.2,15);
+		glScaled(8,0.2,15);*/
 		windowAppearance->apply();
 		windowWall->draw();
 	glPopMatrix();
