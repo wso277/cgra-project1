@@ -54,6 +54,7 @@ CGFappearance* floorAppearance;
 CGFappearance* clockAppearance;
 CGFappearance* robotAppearance;
 CGFappearance* earthAppearance;
+CGFappearance* wallpaperAppearance;
 
 
 
@@ -125,6 +126,7 @@ void LightingScene::init()
 	//Declares scene elements
 	table = new myTable();
 	wall = new Plane(1,-0.5 ,2);
+	impostor = new Plane(10,0,1);
 	windowWall = new LeftWall(1,-0.5,2);
 	boardA = new Plane(BOARD_A_DIVISIONS,0,1);
 	boardB = new Plane(BOARD_B_DIVISIONS,0,1);
@@ -172,6 +174,10 @@ void LightingScene::init()
 
 	earthAppearance = new CGFappearance(ambT,difT,specT,shininessT);
 	earthAppearance->setTexture("earth.jpg");
+
+	wallpaperAppearance = new CGFappearance(ambT,difT,specT,shininessT);
+	wallpaperAppearance->setTexture("wallpaper.jpg");
+
 
 	setUpdatePeriod(updateTime);
 }
@@ -243,12 +249,20 @@ void LightingScene::display()
 
 		//LeftWall
 	glPushMatrix();
-		/*glTranslated(0,4,7.5);
+		glTranslated(0,4,7.5);
 		glRotated(-90.0,0,0,1);
 
-		glScaled(8,0.2,15);*/
+		glScaled(8,0.2,15);
 		windowAppearance->apply();
 		windowWall->draw();
+	glPopMatrix();
+
+	//impostor
+	glPushMatrix();
+		glTranslated(-50,-20,-20);
+		glScaled(1,1,1);
+		wallpaperAppearance->apply();
+		wall->drawImpostor();
 	glPopMatrix();
 
 

@@ -35,6 +35,7 @@ public:
 	int sceneVar;
 	myTable* table;
 	Plane* wall;
+	Plane* impostor;
     LeftWall* windowWall;
 	Plane* boardA;
 	Plane* boardB;

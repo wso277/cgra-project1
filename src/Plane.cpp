@@ -79,3 +79,28 @@ void Plane::draw(int s, int t)
 	glPopMatrix();
 
 }
+
+void Plane::drawImpostor()
+{
+
+
+	glBegin(GL_POLYGON);
+
+	glNormal3f(1,0,0);
+
+	glTexCoord2d(1,0);
+	glVertex3f(0,0,0);
+	glTexCoord2d(1,1);
+	glVertex3f(0,30,0);
+	glTexCoord2d(0,1);
+	glVertex3f(0,30,30);
+	glTexCoord2d(0,0);
+	glVertex3f(0,0,30);
+
+	glEnd();
+
+}
+
+
+
+
