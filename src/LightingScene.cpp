@@ -216,14 +216,7 @@ void LightingScene::display()
 	glScaled(1,8,1);
 	cilindro.draw();
 	glPopMatrix();
-
-	/*glPushMatrix();
-	glTranslated(14,0,11);
-	glScaled(1,8,1);
-	cilindro_flat.draw();
-	glPopMatrix();*/
-
-	//PlaneWall
+	
 	glPushMatrix();
 		glTranslated(7.5,4,0);
 		glRotated(90.0,1,0,0);
@@ -251,7 +244,6 @@ void LightingScene::display()
 	glPushMatrix();
 		glTranslated(0,4,7.5);
 		glRotated(-90.0,0,0,1);
-
 		glScaled(8,0.2,15);
 		windowAppearance->apply();
 		windowWall->draw();
@@ -259,8 +251,8 @@ void LightingScene::display()
 
 	//impostor
 	glPushMatrix();
-		glTranslated(-50,-20,-20);
-		glScaled(1,1,1);
+		glTranslated(-0.5,1,3);
+		glScaled(0.65,0.22,0.33);
 		wallpaperAppearance->apply();
 		wall->drawImpostor();
 	glPopMatrix();
@@ -301,13 +293,7 @@ void LightingScene::display()
 
 
 
-	/*//Second Table
-	glPushMatrix();
-		glTranslated(12,-6.5,8);
-		table->draw();
-	glPopMatrix();*/
 
-	// ---- END Primitive drawing section
 
 
 	// We have been drawing in a memory area that is not visible - the back buffer, 

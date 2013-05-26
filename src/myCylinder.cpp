@@ -63,7 +63,6 @@ void myCylinder::draw() {
 						cos(angulo * deg2rad2));
 				glVertex3f(sin((angulo - delta) * deg2rad2), altura,
 						cos((angulo - delta) * deg2rad2));
-				//glVertex3f(cos(angulo*deg2rad2),altura - altura1 ,sin(angulo*deg2rad2));
 
 				glEnd();
 				angulo += delta;

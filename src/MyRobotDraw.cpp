@@ -163,7 +163,6 @@ void MyRobotDraw::draw() {
 	vector<float> ponto;
 	vector<vector<float> > vertices;
 
-//	printf("normal0 = %f\nnormal\ = %f\nnormal2 = %f\n", normais[0][0],normais[0][1],normais[0][2]);
 
 	glDisable(GL_CULL_FACE);
 
@@ -185,7 +184,6 @@ void MyRobotDraw::draw() {
 
 		for (int i = 0; i < 16; i++) {
 
-			//glTexCoord2d(   (((double)(j+1)/1.0)),(( (double)(i)/1.0)));
 			glNormal3f(normais[i][0] + ((a + 1) * normalx[i]), normais[i][1] + ((a + 1) * normaly[i]),
 					normais[i][2] + ((a + 1) * normalz[i]));
 
@@ -253,8 +251,6 @@ vector<float> MyRobotDraw::calculaNormais(vector<vector<float> > vertices) {
 
 	}
 
-	printf("normal0 = %f\nnormal\ = %f\nnormal2 = %f\n", tmp[0], tmp[1],
-			tmp[2]);
 
 	return tmp;
 }

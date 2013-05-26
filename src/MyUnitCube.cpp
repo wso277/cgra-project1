@@ -6,7 +6,6 @@ void myUnitCube :: draw()
 	glPushMatrix();
 	glTranslated(0,0,-0.5);
 	glRotated(180,0,1,0);
-	//glTexCoord2d(0.0,0.0);
 	glBegin(GL_POLYGON);
 	glNormal3f(0,0,1);
 	glTexCoord2d(0.0,0.0);
@@ -18,13 +17,11 @@ void myUnitCube :: draw()
 	glTexCoord2d(0.0,3.0);
 	glVertex2d(-0.5,0.5);
 	glEnd();
-	//glRectd(-0.5,-0.5,0.5,0.5);
 	
 	glPopMatrix();
 	
 	glPushMatrix();
-	glTranslated(0,0,0.5);
-	//glTexCoord2d(0.0,0.0);	
+	glTranslated(0,0,0.5);	
 	glBegin(GL_POLYGON);
 	glNormal3f(0,0,1);
 	glTexCoord2d(0.0,0.0);
@@ -36,7 +33,6 @@ void myUnitCube :: draw()
 	glTexCoord2d(0.0,3.0);
 	glVertex2d(-0.5,0.5);
 	glEnd();
-	//glRectd(0.5,0.5,-0.5,-0.5);
 	
 	glPopMatrix();
 
@@ -54,7 +50,6 @@ void myUnitCube :: draw()
 	glTexCoord2d(0.0,3.0);
 	glVertex2d(-0.5,0.5);
 	glEnd();
-	//glRectd(-0.5,-0.5,0.5,0.5);
 	glPopMatrix();
 
 		glPushMatrix();
@@ -71,7 +66,6 @@ void myUnitCube :: draw()
 	glTexCoord2d(0.0,3.0);
 	glVertex2d(-0.5,0.5);
 	glEnd();
-	//glRectd(-0.5,-0.5,0.5,0.5);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -88,7 +82,6 @@ void myUnitCube :: draw()
 	glTexCoord2d(0.0,3.0);
 	glVertex2d(-0.5,0.5);
 	glEnd();
-	//glRectd(-0.5,-0.5,0.5,0.5);
 	glPopMatrix();
 
 	glPushMatrix();
@@ -105,6 +98,5 @@ void myUnitCube :: draw()
 	glTexCoord2d(0.0,3.0);
 	glVertex2d(-0.5,0.5);
 	glEnd();
-	//glRectd(-0.5,-0.5,0.5,0.5);
 	glPopMatrix();
 }

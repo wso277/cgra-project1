@@ -70,29 +70,6 @@ void TPscene::display()
 	float cos_a = cos(a_rad);
 	float sin_a = sin(a_rad);
 
-	/*float rot[16] = { cos_a,  0.0,  -sin_a,  0.0,
-                      0.0,    1.0,   0.0,    0.0,
-                      sin_a,  0.0,   cos_a,  0.0,
-                      0.0,    0.0,   0.0,    1.0};
-
-	// Scaling by (2,2,1)
-	float sca[16] = { 2.0, 0.0, 0.0, 0.0,
-                      0.0, 2.0, 0.0, 0.0,
-                      0.0, 0.0, 1.0, 0.0,
-                      0.0, 0.0, 0.0, 1.0};
-
-	glPushMatrix();
-	glTranslated(0,5,0);
-	myObject.draw();
-	glPopMatrix();
-	glPushMatrix();
-	// Multiplication of the previous transformations
-	//glMultMatrixf(tra);     // GT = GT * tra
-	//glMultMatrixf(rot);     // GT = GT * rot 
-	// glMultMatrixf(sca);     // GT = GT * sca
-	glScaled(2,2,1);
-	glTranslated(5,0,2);
-	//glRotated(30,0,1,0);
 	
 	
 	
@@ -107,7 +84,7 @@ void TPscene::display()
     // NOTE: the visible face of the polygon is determined by the order of the vertices
 
 	myObject.draw();
-	glPopMatrix();*/
+	glPopMatrix();
 
 	// ---- END Primitive drawing section
 
